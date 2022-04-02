@@ -1,0 +1,69 @@
+.bigh1 {
+    font-size: 100px;
+}
+
+ul {
+    list-style-type: none;
+    list-style: none;
+}
+
+.ulli-1 {
+    float: right;
+}
+
+.ulli-1 li {
+    display: inline;
+    margin: 10px;
+    padding: 5px 10px;
+    border: 2px solid #2A7DE1;
+    border-radius: 10px;
+}
+
+.card {
+    display: flex;
+    height: 600px;
+}
+
+.card img {
+    width: 100%;
+    height: 80%;
+    margin-bottom: 15px;
+}
+
+.card-smaller {
+    display: flex;
+    height: 190px;
+    margin-bottom: 15px;
+}
+
+.card-smaller img {
+    height: 100%;
+    width: 45%;
+    border-right: 2px solid #FF595A;
+    padding-right: 20px;
+}
+
+.card-smaller h5 {
+    padding-left: 15px;
+    width: 55%;
+}
+
+.card-smaller button {
+    margin-top: 10px;
+}
+
+.card-medium {
+    height: 300px;
+    border: 2px solid red;
+    margin: 10px 0;
+}
+
+.card-medium img {
+    width: 100%;
+    height: 60%;
+    margin-bottom: 10px;
+}
+
+.card-medium p {
+    font-size: 10px;
+}
