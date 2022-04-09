@@ -7,18 +7,6 @@ ul {
     list-style: none;
 }
 
-.ulli-1 {
-    float: right;
-}
-
-.ulli-1 li {
-    display: inline;
-    margin: 10px;
-    padding: 5px 10px;
-    border: 2px solid #2A7DE1;
-    border-radius: 10px;
-}
-
 .card {
     display: flex;
     height: 600px;
@@ -66,4 +54,32 @@ ul {
 
 .card-medium p {
     font-size: 10px;
+}
+
+.smad span {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.smad a {
+    outline: none;
+    text-decoration: none;
+    color: black;
+    margin: 10px 0;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: 2px solid #2A7DE1;
+    border-radius: 10px;
+}
+
+.smad a:hover {
+    color: black;
+}
+
+.row_ots {
+    margin-bottom: 50px;
+}
+
+.row_ots h1 {
+    font-size: 3rem;
 }

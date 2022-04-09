@@ -1,0 +1,54 @@
+.smad span {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.smad a {
+    outline: none;
+    text-decoration: none;
+    color: black;
+    margin: 10px 0;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: 2px solid #2A7DE1;
+    border-radius: 10px;
+}
+
+.smad a:hover {
+    color: black;
+}
+
+.row_ots {
+    margin-bottom: 50px;
+}
+
+.row_ots h1 {
+    font-size: 3rem;
+}
+
+.card {
+    display: flex;
+    height: 600px;
+}
+
+.card img {
+    width: 100%;
+    height: 60%;
+    margin-bottom: 15px;
+}
+
+.small-card {
+    width: 100%;
+    height: 300px;
+    border: 2px solid red;
+}
+
+.small-card img {
+    width: 100%;
+    height: 60%;
+    margin-bottom: 10px;
+}
+
+.small-card p {
+    font-size: 10px;
+}
