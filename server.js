@@ -1,13 +1,28 @@
 const express = require('express');
 const sqlite3 = require('sqlite3');
+const cookieParser = require("cookie-parser");
+const sessions = require('express-session');
 const hbs = require('hbs');
+var bodyParser = require('body-parser')
 
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 let app = express();
 app.set('view engine', 'hbs');
 app.set('views', './templates');
+app.use(cookieParser());
 
 app.use(express.static(__dirname + '/static'));
 hbs.registerPartials(__dirname + '/templates/partials')
+
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+    secret: "karkarmysecret123321loltopdota2uzhas",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
+
+var session;
 
 async function data(query, datas) {
     let db = new sqlite3.Database('blog.db', (err) => {
@@ -25,6 +40,8 @@ async function data(query, datas) {
         technology_category: "SELECT * FROM general WHERE category = ?",
         education_category: "SELECT * FROM general WHERE category = ?",
         covid_category: "SELECT * FROM general WHERE category = ?",
+        create: "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+        loging: "SELECT id FROM users WHERE name = ? AND password = ?"
     };
     let sql = sqls[query];
 
@@ -136,6 +153,35 @@ app.get('/life/:id', (req, res) => {
     });
 });
 
+app.get('/register', (req, res) => {
+    console.log(req.body);
+    res.render('createacc.hbs')
+})
+
+app.post('/create', urlencodedParser, (req, res) => {
+    data('create', [req.body.username, req.body.email, req.body.password]).then((data) => {
+        res.redirect('/login')
+    })
+})
+
+app.get('/login', (req, res) => {
+    console.log(req.body);
+    res.render('login.hbs')
+})
+
+app.post('/loging', urlencodedParser, (req, res) => {
+    data('loging', [req.body.username, req.body.password]).then((data) => {
+        console.log(data);
+        if (data.length > 0) {
+            session=req.session;
+            session.userid=data[0]['id'];
+            console.log(session);
+            res.redirect('/');
+        } else {
+            res.redirect('/login');
+        }
+    })
+})
 
 app.get('/inner', (req, res) => {
     res.render('inner.hbs')
