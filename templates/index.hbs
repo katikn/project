@@ -15,17 +15,17 @@
     {{> header}}
     <div class="container">
         <div class="row row_ots">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <h1>LiveBlog</h1>
             </div>
-            <div class="col-md-8 smad">
-                <span>Categories:</span>
-                <a href="/life">Life</a>
-                <a href="/popular">Popular</a>
-                <a href="/travel">Travel</a>
-                <a href="/technology">Technology</a>
-                <a href="/education">Education</a>
-                <a href="/covid">COVID-19🦠</a>
+            <div class="col-md-9 smad">
+                <span>Категории:</span>
+                <a href="/popular">Популярно</a>
+                <a href="/travel">Путешествия</a>
+                <a href="/covid">Коронавирус🦠</a>
+                <a href="/technology">Технологии</a>
+                <a href="/education">Образование</a>
+                <a href="/life">Жизнь</a>
             </div>
         </div>
     </div>
@@ -38,7 +38,8 @@
                     <div class="card">
                         <img src="/images/{{img}}" alt="">
                         <h2>{{title}}</h2>
-                        <p>{{text}}</p>
+                        <span class="sizesmalll">By {{username}}</span>
+                        <a href="/{{name}}/{{id}}" class="btncolor">Читать</a>
                     </div>
                     {{/with}}
                 </div>
@@ -48,7 +49,8 @@
                     <div class="card-smaller">
                         <img src="/images/{{img}}" alt="">
                         <h5>{{title}} <br>
-                            <button type="button" class="btn btn-outline-primary">Go</button>
+                            <span class="sizesmalll">By {{username}}</span> <br> <br>
+                            <a href="/{{name}}/{{id}}" class="btncolorblue">Читать</a>
                         </h5>
                     </div>
                     {{/with}}
@@ -56,7 +58,8 @@
                     <div class="card-smaller">
                         <img src="/images/{{img}}" alt="">
                         <h5>{{title}} <br>
-                            <button type="button" class="btn btn-outline-primary">Go</button>
+                            <span class="sizesmalll">By {{username}}</span> <br> <br>
+                            <a href="/{{name}}/{{id}}" class="btncolorblue">Читать</a>
                         </h5>
                     </div>
                     {{/with}}
@@ -64,8 +67,10 @@
                     <div class="card-smaller">
                         <img src="/images/{{img}}" alt="">
                         <h5>{{title}} <br>
-                            <button type="button" class="btn btn-outline-primary">Go</button>
+                            <span class="sizesmalll">By {{username}}</span> <br> <br>
+                            <a href="/{{name}}/{{id}}" class="btncolorblue">Читать</a>
                         </h5>
+                        
                     </div>
                     {{/with}}
                 </div>
@@ -75,14 +80,16 @@
                 <div class="col-md-3">
                     <div class="card-medium">
                         <img src="/images/{{img}}" alt="">
+                        <hr>
                         <h3>{{this.title}}</h3>
+                        <h6>By {{username}}</h6>
+                        <a href="/{{name}}/{{id}}" class="btncolorblue">Читать</a>
                     </div>
                 </div>
                 {{/each}}
             </div>
         </div>
     </main>
-    {{> footer}}
 </body>
 
 </html>

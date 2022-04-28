@@ -17,69 +17,25 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
+                    {{#each querys}}
                     <div class="card">
-                        <img src="/images/1.jpg" alt="">
-                        <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. </h3>
-                        <p>23 Apr 2022 | Valeriy Uryadov</p>
+                        <img src="/images/{{img}}" alt="">
+                        <h3>{{title}}</h3>
+                        <h5>{{status}} | {{username}}</h5>
                     </div>
+                    {{/each}}
                 </div>
                 <div class="col-md-4">
+                    {{#each querys}}
                     <div class="right-card">
-                        <h1>Featured</h1>
-                        <h5>Main topic</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita unde ut porro suscipit
-                            pariatur est error aspernatur, magni quia animi quasi. Beatae minus qui ducimus obcaecati
-                            culpa dolorum similique ea?</p>
-                        <h5>Main topic</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita unde ut porro suscipit
-                            pariatur est error aspernatur, magni quia animi quasi. Beatae minus qui ducimus obcaecati
-                            culpa dolorum similique ea?</p>
-                        <h5>Main topic</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita unde ut porro suscipit
-                            pariatur est error aspernatur, magni quia animi quasi. Beatae minus qui ducimus obcaecati
-                            culpa dolorum similique ea?</p>
+                        <h1>Продолжение</h1>
+                        <p>{{text}}</p>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="main-part">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur reiciendis molestias
-                            asperiores nemo dolore magnam dicta repudiandae nihil tenetur. Reprehenderit exercitationem
-                            voluptatem dicta architecto ducimus nesciunt molestiae. Sit, ducimus veritatis? Lorem ipsum
-                            dolor sit amet consectetur adipisicing elit. Placeat nemo ratione illum quam recusandae
-                            repellendus. Ab laudantium dolores corporis cum quisquam facere perspiciatis, obcaecati fuga
-                            dolor iure rem molestiae earum?Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Consectetur reiciendis molestias
-                            asperiores nemo dolore magnam dicta repudiandae nihil tenetur. Reprehenderit exercitationem
-                            voluptatem dicta architecto ducimus nesciunt molestiae. Sit, ducimus veritatis? Lorem ipsum
-                            dolor sit amet consectetur adipisicing elit. Placeat nemo ratione illum quam recusandae
-                            repellendus. Ab laudantium dolores corporis cum quisquam facere perspiciatis, obcaecati fuga
-                            dolor iure rem molestiae earum?Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Consectetur reiciendis molestias
-                            asperiores nemo dolore magnam dicta repudiandae nihil tenetur. Reprehenderit exercitationem
-                            voluptatem dicta architecto ducimus nesciunt molestiae. Sit, ducimus veritatis? Lorem ipsum
-                            dolor sit amet consectetur adipisicing elit. Placeat nemo ratione illum quam recusandae
-                            repellendus. Ab laudantium dolores corporis cum quisquam facere perspiciatis, obcaecati fuga
-                            dolor iure rem molestiae earum?</p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur reiciendis molestias
-                            asperiores nemo dolore magnam dicta repudiandae nihil tenetur. Reprehenderit exercitationem
-                            voluptatem dicta architecto ducimus nesciunt molestiae. Sit, ducimus veritatis? Lorem ipsum
-                            dolor sit amet consectetur adipisicing elit. Placeat nemo ratione illum quam recusandae
-                            repellendus. Ab laudantium dolores corporis cum quisquam facere perspiciatis, obcaecati fuga
-                            dolor iure rem molestiae earum?Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Consectetur reiciendis molestias
-                            asperiores nemo dolore magnam dicta repudiandae nihil tenetur. Reprehenderit exercitationem
-                            voluptatem dicta architecto ducimus nesciunt molestiae. Sit, ducimus veritatis? Lorem ipsum
-                            dolor sit amet consectetur adipisicing elit. Placeat nemo ratione illum quam recusandae
-                            repellendus. Ab laudantium dolores corporis cum quisquam facere perspiciatis, obcaecati fuga
-                            dolor iure rem molestiae earum?</p>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
         </div>
     </main>
-    {{> footer}}
 </body>
 
 </html>

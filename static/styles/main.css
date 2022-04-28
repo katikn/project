@@ -42,8 +42,11 @@ ul {
 
 .card-medium {
     height: 300px;
-    border: 2px solid red;
-    margin: 10px 0;
+    margin-bottom: 100px;
+}
+
+.card-medium hr {
+    color: #2A7DE1;
 }
 
 .card-medium img {
@@ -83,3 +86,36 @@ ul {
 .row_ots h1 {
     font-size: 3rem;
 }
+
+body {
+    min-height: 500px;
+}
+
+.btncolor {
+    color: #FF595A;
+    outline: none;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.btncolor:hover {
+    color: #FF595A;
+}
+
+.btncolorblue {
+    color: #2A7DE1;
+    font-size: 20px !important;
+    font-weight: 600;
+    outline: none;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.btncolorblue:hover {
+    color: #2A7DE1;
+}
+
+.sizesmalll {
+    font-size: 15px !important;
+}
+

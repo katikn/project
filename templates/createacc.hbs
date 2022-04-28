@@ -13,13 +13,26 @@
 
 <body>
     {{> header}}
-    <form action="/create" method="POST">
-        <input type="text" name="username" id="username" placeholder="Enter Username"> <br> <br>
-        <input type="email" name="email" id="email" placeholder="Enter Email"> <br> <br>
-        <input type="password" name="password" id="password" placeholder="Enter Password"> <br> <br>
-        <input type="submit" value="SignIn">
-    </form>
-    {{> footer}}
+    <h1 align="center">Регистрация</h1>
+    <div class="container">
+        <div class='row justify-content-md-center'>
+            <form action="/create" method="POST">
+                <div class="mb-3">
+                    <span>Username</span>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Введите Username">
+                </div>
+                <div class="mb-3">
+                    <span>Email</span>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Введите почту">
+                </div>
+                <div class="mb-3">
+                    <span>Password</span>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Введите пароль">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Sign In">
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
