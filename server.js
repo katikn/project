@@ -68,7 +68,8 @@ async function data(query, datas) {
         admin: "SELECT * FROM general JOIN categories ON general.category = categories.id_category JOIN users ON general.user = users.id_user",
         delete: "DELETE FROM general WHERE id = ?",
         edit: "SELECT * FROM general JOIN categories ON general.category = categories.id_category WHERE id = ?",
-        editpost: "UPDATE general SET title = ?, text = ?, category = ?, img = ? WHERE id = ?"
+        editpost: "UPDATE general SET title = ?, text = ?, category = ?, img = ? WHERE id = ?",
+        profile: "SELECT * FROM general JOIN categories ON general.category = categories.id_category JOIN users ON general.user = users.id_user WHERE id_user = ?"
     };
     let sql = sqls[query];
 
@@ -121,6 +122,8 @@ app.get('/', (req, res) => {
                 featured3: data[3]
             };
             data_template["islogin"] = 1
+            data_template["userid"] = req.session.userid
+            console.log(data_template);
             console.log(req.session);
             if (req.session.userid == 1){
                 data_template["admin"] = 1
@@ -614,15 +617,32 @@ app.get('/edit/:id', (req, res) => {
 
 app.post('/editpost', urlencodedParser, upload.single('image'), (req, res) => {
     console.log(req.body);
-    let data = req.body;
+    let idata = req.body;
     if (!req.file.filename){
-        data('editpost', [req.body.title, req.body.text, req.body.select, '', req.body.id]).then((data) => {
+        data('editpost', [idata.title, idata.text, idata.select, '', idata.id]).then((data) => {
             res.redirect('/admin')
         })
     } else {
-        data('editpost', [req.body.title, req.body.text, req.body.select, req.file.filename, req.body.id]).then((data) => {
+        data('editpost', [idata.title, idata.text, idata.select, req.file.filename, idata.id]).then((data) => {
             res.redirect('/admin')
         })
+    }
+})
+
+app.get('/profile/:id', (req, res) => {
+    if (req.params.id == req.session.userid) {
+        data('profile', [req.params.id]).then((data) => {
+            data_template = {
+                headers: Object.keys(data[0]),
+                querys: data,
+                profilename: data.slice(0, 1)
+            };
+            data_template["islogin"] = 1
+            console.log(data_template);
+            res.render('profile.hbs', data_template)
+        })
+    } else {
+        res.redirect('/')
     }
     
 })

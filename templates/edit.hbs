@@ -19,15 +19,18 @@
                 {{#each querys}}
                 <div class="mb-3">
                     <span>Заголовок</span>
-                    <input type="text" name="title" id="title" value="{{title}}" class="form-control" placeholder="Впишите загаловок">
+                    <input type="text" name="title" id="title" value="{{title}}" class="form-control"
+                        placeholder="Впишите загаловок">
                 </div>
                 <div class="mb-3">
                     <span>Текст</span>
-                    <textarea name="text" id="text" placeholder="Впишите текст" class="form-control" rows="5" cols="35">{{text}}</textarea>
+                    <textarea name="text" id="text" placeholder="Впишите текст" class="form-control" rows="5"
+                        cols="35">{{text}}</textarea>
                 </div>
                 <div class="mb-3">
-                    <select name="select" class="form-control" name="category">
-                        <option disabled selected value="{{category}}">{{category}}. {{name}}</option>
+                    <span>Категория поста: {{category}}. {{name}}</span> <br>
+                    <span>Выберите категорию:</span>
+                    <select name="select" class="form-control" name="category" required>
                         <option value="1">1. popular</option>
                         <option value="2">2. travel</option>
                         <option value="3">3. covid</option>
@@ -38,9 +41,10 @@
                 </div>
                 <div class="mb-3">
                     <img width="190px" src="/images/{{img}}" alt="">
-                    <input type="file" name="image" accept="image/*, image/jpeg">
+                    <input type="file" name="image" accept="image/*, image/jpeg" required>
                 </div>
                 <input type="submit" class="btn btn-primary" value="Edit">
+                <input type="hidden" name="id" id="id" value="{{id}}">
                 {{/each}}
             </form>
         </div>
