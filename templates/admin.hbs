@@ -18,6 +18,7 @@
             {{#each headers}}
             <th>{{this}}</th>
             {{/each}}
+            <th>edit</th>
             <th>delete</th>
         </tr>
         {{#each querys}}
@@ -25,6 +26,7 @@
             {{#each this}}
             <td>{{this}}</td>
             {{/each}}
+            <td><a href="/edit/{{id}}">edit</a></td>
             <td><a href="/delete/{{id}}">del</a></td>
         </tr>
         {{/each}}

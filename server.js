@@ -66,7 +66,9 @@ async function data(query, datas) {
         education_post: "SELECT * FROM general JOIN users ON general.user = users.id_user WHERE id = ? AND category = ?",
         technology_post: "SELECT * FROM general JOIN users ON general.user = users.id_user WHERE id = ? AND category = ?",
         admin: "SELECT * FROM general JOIN categories ON general.category = categories.id_category JOIN users ON general.user = users.id_user",
-        delete: "DELETE FROM general WHERE id = ?"
+        delete: "DELETE FROM general WHERE id = ?",
+        edit: "SELECT * FROM general JOIN categories ON general.category = categories.id_category WHERE id = ?",
+        editpost: "UPDATE general SET title = ?, text = ?, category = ?, img = ? WHERE id = ?"
     };
     let sql = sqls[query];
 
@@ -599,4 +601,29 @@ app.get('/delete/:id', (req, res) => {
     })
 })
 
+app.get('/edit/:id', (req, res) => {
+    data('edit', [req.params.id]).then((data) => {
+        data_template = {
+            querys: data
+        };
+        data_template["islogin"] = 1
+        data_template["admin"] = 1
+        res.render('edit.hbs', data_template)
+    })
+})
+
+app.post('/editpost', urlencodedParser, upload.single('image'), (req, res) => {
+    console.log(req.body);
+    let data = req.body;
+    if (!req.file.filename){
+        data('editpost', [req.body.title, req.body.text, req.body.select, '', req.body.id]).then((data) => {
+            res.redirect('/admin')
+        })
+    } else {
+        data('editpost', [req.body.title, req.body.text, req.body.select, req.file.filename, req.body.id]).then((data) => {
+            res.redirect('/admin')
+        })
+    }
+    
+})
 app.listen(3000);
