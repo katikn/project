@@ -16,10 +16,11 @@
     <h1 align="center">Регистрация</h1>
     <div class="container">
         <div class='row justify-content-md-center'>
-            <form action="/create" method="POST">
+            <form action="/create" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <span>Username</span>
-                    <input type="text" name="username" id="username" class="form-control" placeholder="Введите Username">
+                    <input type="text" name="username" id="username" class="form-control"
+                        placeholder="Введите Username">
                 </div>
                 <div class="mb-3">
                     <span>Email</span>
@@ -27,7 +28,11 @@
                 </div>
                 <div class="mb-3">
                     <span>Password</span>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Введите пароль">
+                    <input type="password" name="password" id="password" class="form-control"
+                        placeholder="Введите пароль">
+                </div>
+                <div class="mb-3">
+                    <input type="file" name="imageprofile" accept="image/*, image/jpeg">
                 </div>
                 <input type="submit" class="btn btn-primary" value="Sign In">
             </form>

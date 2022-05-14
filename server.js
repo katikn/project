@@ -19,7 +19,19 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + path.extname(file.originalname))
     }
 })
+
+const storage2 = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './static/profileimages')
+    },
+    filename: (req, file, cb) => {
+        console.log(file);
+        let imagename = file.originalname
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+})
 const upload = multer({ storage: storage })
+const upload2 = multer({ storage: storage2 })
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.set('view engine', 'hbs');
@@ -56,7 +68,7 @@ async function data(query, datas) {
         technology_category: "SELECT * FROM general JOIN categories ON general.category = categories.id_category WHERE category = ?",
         education_category: "SELECT * FROM general JOIN categories ON general.category = categories.id_category WHERE category = ?",
         covid_category: "SELECT * FROM general JOIN categories ON general.category = categories.id_category WHERE category = ?",
-        create: "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
+        create: "INSERT INTO users (username, email, password, img_user) VALUES (?, ?, ?, ?)",
         loging: "SELECT id_user FROM users WHERE username = ? AND password = ?",
         newpost: "INSERT INTO general (title, text, category, img, user) VALUES (?, ?, ?, ?, ?)",
         life_post: "SELECT * FROM general JOIN users ON general.user = users.id_user WHERE id = ? AND category = ?",
@@ -69,7 +81,8 @@ async function data(query, datas) {
         delete: "DELETE FROM general WHERE id = ?",
         edit: "SELECT * FROM general JOIN categories ON general.category = categories.id_category WHERE id = ?",
         editpost: "UPDATE general SET title = ?, text = ?, category = ?, img = ? WHERE id = ?",
-        profile: "SELECT * FROM general JOIN categories ON general.category = categories.id_category JOIN users ON general.user = users.id_user WHERE id_user = ?"
+        profile: "SELECT * FROM general JOIN categories ON general.category = categories.id_category JOIN users ON general.user = users.id_user WHERE id_user = ?",
+        profileedit: "SELECT * FROM users WHERE id_user = ?"
     };
     let sql = sqls[query];
 
@@ -154,6 +167,7 @@ app.get('/life', (req, res) => {
                 header: data.slice(0, 1)
             };
             data_template["islogin"] = 1
+            data_template["userid"] = req.session.userid
             if (req.session.userid == 1){
                 data_template["admin"] = 1
                 res.render('categories.hbs', data_template)
@@ -183,6 +197,7 @@ app.get('/popular', (req, res) => {
                 header: data.slice(0, 1)
             };
             data_template["islogin"] = 1
+            data_template["userid"] = req.session.userid
             if (req.session.userid == 1){
                 data_template["admin"] = 1
                 res.render('categories.hbs', data_template)
@@ -211,6 +226,7 @@ app.get('/travel', (req, res) => {
                 header: data.slice(0, 1)
             };
             data_template["islogin"] = 1
+            data_template["userid"] = req.session.userid
             if (req.session.userid == 1){
                 data_template["admin"] = 1
                 res.render('categories.hbs', data_template)
@@ -239,6 +255,7 @@ app.get('/technology', (req, res) => {
                 header: data.slice(0, 1)
             };
             data_template["islogin"] = 1
+            data_template["userid"] = req.session.userid
             if (req.session.userid == 1){
                 data_template["admin"] = 1
                 res.render('categories.hbs', data_template)
@@ -267,6 +284,7 @@ app.get('/education', (req, res) => {
                 header: data.slice(0, 1)
             };
             data_template["islogin"] = 1
+            data_template["userid"] = req.session.userid
             if (req.session.userid == 1){
                 data_template["admin"] = 1
                 res.render('categories.hbs', data_template)
@@ -295,6 +313,7 @@ app.get('/covid', (req, res) => {
                 header: data.slice(0, 1)
             };
             data_template["islogin"] = 1
+            data_template["userid"] = req.session.userid
             if (req.session.userid == 1){
                 data_template["admin"] = 1
                 res.render('categories.hbs', data_template)
@@ -326,6 +345,7 @@ app.get('/life/:id', (req, res) => {
             if (data_template['querys'].length > 0){
                 console.log(data_template);
                 data_template["islogin"] = 1
+                data_template["userid"] = req.session.userid
                 if (req.session.userid == 1){
                     data_template["admin"] = 1
                     res.render('inner.hbs', data_template)
@@ -362,6 +382,7 @@ app.get('/popular/:id', (req, res) => {
             if (data_template['querys'].length > 0){
                 console.log(data_template);
                 data_template["islogin"] = 1
+                data_template["userid"] = req.session.userid
                 if (req.session.userid == 1){
                     data_template["admin"] = 1
                     res.render('inner.hbs', data_template)
@@ -398,6 +419,7 @@ app.get('/travel/:id', (req, res) => {
             if (data_template['querys'].length > 0){
                 console.log(data_template);
                 data_template["islogin"] = 1
+                data_template["userid"] = req.session.userid
                 if (req.session.userid == 1){
                     data_template["admin"] = 1
                     res.render('inner.hbs', data_template)
@@ -434,6 +456,7 @@ app.get('/covid/:id', (req, res) => {
             if (data_template['querys'].length > 0){
                 console.log(data_template);
                 data_template["islogin"] = 1
+                data_template["userid"] = req.session.userid
                 if (req.session.userid == 1){
                     data_template["admin"] = 1
                     res.render('inner.hbs', data_template)
@@ -470,6 +493,7 @@ app.get('/education/:id', (req, res) => {
             if (data_template['querys'].length > 0){
                 console.log(data_template);
                 data_template["islogin"] = 1
+                data_template["userid"] = req.session.userid
                 if (req.session.userid == 1){
                     data_template["admin"] = 1
                     res.render('inner.hbs', data_template)
@@ -506,6 +530,7 @@ app.get('/technology/:id', (req, res) => {
             if (data_template['querys'].length > 0){
                 console.log(data_template);
                 data_template["islogin"] = 1
+                data_template["userid"] = req.session.userid
                 if (req.session.userid == 1){
                     data_template["admin"] = 1
                     res.render('inner.hbs', data_template)
@@ -529,8 +554,8 @@ app.get('/register', (req, res) => {
     
 })
 
-app.post('/create', urlencodedParser, (req, res) => {
-    data('create', [req.body.username, req.body.email, req.body.password]).then((data) => {
+app.post('/create', urlencodedParser, upload2.single('imageprofile'), (req, res) => {
+    data('create', [req.body.username, req.body.email, req.body.password, req.file.filename]).then((data) => {
         res.redirect('/login')
     })
 })
@@ -565,6 +590,7 @@ app.get('/newpost', (req, res) => {
         res.redirect('/login');
     } else {
         data_template["islogin"] = 1
+        data_template["userid"] = req.session.userid
         res.render('createpost.hbs', data_template)
     }
     
@@ -590,6 +616,7 @@ app.get('/admin', (req, res) => {
                 querys: data
             };
             data_template["islogin"] = 1
+            data_template["userid"] = req.session.userid
             data_template["admin"] = 1
             res.render('admin.hbs', data_template)
         })
@@ -610,6 +637,7 @@ app.get('/edit/:id', (req, res) => {
             querys: data
         };
         data_template["islogin"] = 1
+        data_template["userid"] = req.session.userid
         data_template["admin"] = 1
         res.render('edit.hbs', data_template)
     })
@@ -638,12 +666,39 @@ app.get('/profile/:id', (req, res) => {
                 profilename: data.slice(0, 1)
             };
             data_template["islogin"] = 1
+            data_template["userid"] = req.session.userid
+            if (req.session.userid == 1) {
+                data_template["admin"] = 1
+                res.render('profile.hbs', data_template)
+            } else {
+                res.render('profile.hbs', data_template)
+            }
             console.log(data_template);
-            res.render('profile.hbs', data_template)
         })
     } else {
         res.redirect('/')
     }
+});
+
+app.get('/editprofile/:id', (req, res) => {
+    if (req.params.id == req.session.userid) {
+        data('profileedit', [req.params.id]).then((data) => {
+            data_template = { data: data }
+            data_template["islogin"] = 1
+            data_template["userid"] = req.session.userid
+            if (req.session.userid == 1) {
+                data_template["admin"] = 1
+                res.render('profileedit.hbs', data_template)
+            } else {
+                res.render('profileedit.hbs', data_template)
+            }
+        })
+    } else {
+        res.redirect('/')
+    }
+});
+
+app.post('/editprof', urlencodedParser, upload.single('image'), (req, res) => {
     
 })
 app.listen(3000);

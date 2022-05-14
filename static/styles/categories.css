@@ -28,7 +28,8 @@
 
 .card {
     display: flex;
-    height: 600px;
+    height: 450px;
+    border: 0px !important;
 }
 
 .card img {

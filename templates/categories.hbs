@@ -33,7 +33,7 @@
         <div class="container">
             <div class="row">
                 {{#each header}}
-                <h3>{{name}}</h3>
+                <h3 style="text-transform: capitalize">{{name}}</h3>
                 {{/each}}
                 {{#each most_recent}}
                 <div class="col-md-6">
@@ -45,7 +45,7 @@
                 </div>
                 {{/each}}
                 {{#each querys}}
-                <div class="col-md-3">
+                <div class="col-md-3 card">
                     <div class="small-card">
                         <img src="/images/{{img}}" alt="">
                         <hr>

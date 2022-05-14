@@ -20,16 +20,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
-                <img src="" alt="" width="200px" height="200px">
+            {{#each profilename}}
+            <div class="col-md-2" style="border: 1px solid grey;">
+                <img src="/profileimages/{{img_user}}" alt="Вы не выбрали изображение профиля" width="200px"
+                    height="200px">
             </div>
             <div class="col-md-10">
-                {{#each profilename}}
                 <h1>Имя пользователя: {{username}}</h1>
                 <h4>Адрес электронной почты: {{email}}</h4>
                 <h3>id: {{id_user}} </h3>
-                {{/each}}
+                <h4>Изменить профиль:</h4>
+                <a href="/editprofile/{{id_user}}">Здесь</a>
             </div>
+            {{/each}}
         </div>
         <div class="row">
             <div class="col-md-12">
