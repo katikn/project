@@ -69,7 +69,7 @@ async function data(query, datas) {
         education_category: "SELECT * FROM general JOIN categories ON general.category = categories.id_category WHERE category = ?",
         covid_category: "SELECT * FROM general JOIN categories ON general.category = categories.id_category WHERE category = ?",
         create: "INSERT INTO users (username, email, password, img_user) VALUES (?, ?, ?, ?)",
-        loging: "SELECT id_user FROM users WHERE username = ? AND password = ?",
+        loging: "SELECT id_user FROM users WHERE email = ? AND password = ?",
         newpost: "INSERT INTO general (title, text, category, img, user) VALUES (?, ?, ?, ?, ?)",
         life_post: "SELECT * FROM general JOIN users ON general.user = users.id_user WHERE id = ? AND category = ?",
         popular_post: "SELECT * FROM general JOIN users ON general.user = users.id_user WHERE id = ? AND category = ?",
@@ -81,8 +81,10 @@ async function data(query, datas) {
         delete: "DELETE FROM general WHERE id = ?",
         edit: "SELECT * FROM general JOIN categories ON general.category = categories.id_category WHERE id = ?",
         editpost: "UPDATE general SET title = ?, text = ?, category = ?, img = ? WHERE id = ?",
-        profile: "SELECT * FROM general JOIN categories ON general.category = categories.id_category JOIN users ON general.user = users.id_user WHERE id_user = ?",
-        profileedit: "SELECT * FROM users WHERE id_user = ?"
+        profileinfo: "SELECT * FROM general JOIN categories ON general.category = categories.id_category JOIN users ON general.user = users.id_user WHERE id_user = ?",
+        profile: "SELECT * FROM users WHERE id_user = ?",
+        profileedit: "UPDATE users SET username = ?, email = ?, password = ?, img_user = ? WHERE id_user = ?"
+        
     };
     let sql = sqls[query];
 
@@ -569,7 +571,7 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/loging', urlencodedParser, (req, res) => {
-    data('loging', [req.body.username, req.body.password]).then((data) => {
+    data('loging', [req.body.email, req.body.password]).then((data) => {
         if (data.length > 0) {
             session = req.session;
             session.userid = data[0]['id_user'];
@@ -659,21 +661,26 @@ app.post('/editpost', urlencodedParser, upload.single('image'), (req, res) => {
 
 app.get('/profile/:id', (req, res) => {
     if (req.params.id == req.session.userid) {
-        data('profile', [req.params.id]).then((data) => {
-            data_template = {
-                headers: Object.keys(data[0]),
-                querys: data,
-                profilename: data.slice(0, 1)
-            };
-            data_template["islogin"] = 1
-            data_template["userid"] = req.session.userid
-            if (req.session.userid == 1) {
-                data_template["admin"] = 1
-                res.render('profile.hbs', data_template)
+        data('profileinfo', [req.params.id]).then((data) => {
+            if (data.length > 0) {
+                data_template = {
+                    headers: Object.keys(data[0]),
+                    querys: data,
+                    profilename: data.slice(0, 1)
+                };
+                console.log(data_template);
+                data_template["islogin"] = 1;
+                data_template["userid"] = req.session.userid;
+                if (req.session.userid == 1) {
+                    data_template["admin"] = 1;
+                    res.render('profile.hbs', data_template);
+                } else {
+                    res.render('profile.hbs', data_template);
+                }
             } else {
-                res.render('profile.hbs', data_template)
+                res.send('Такой страницы ещё нет (напишите свой первый пост) <a href="/">На главную</a>')
             }
-            console.log(data_template);
+            
         })
     } else {
         res.redirect('/')
@@ -682,7 +689,7 @@ app.get('/profile/:id', (req, res) => {
 
 app.get('/editprofile/:id', (req, res) => {
     if (req.params.id == req.session.userid) {
-        data('profileedit', [req.params.id]).then((data) => {
+        data('profile', [req.params.id]).then((data) => {
             data_template = { data: data }
             data_template["islogin"] = 1
             data_template["userid"] = req.session.userid
@@ -698,7 +705,18 @@ app.get('/editprofile/:id', (req, res) => {
     }
 });
 
-app.post('/editprof', urlencodedParser, upload.single('image'), (req, res) => {
-    
+app.post('/editprof', urlencodedParser, upload2.single('image'), (req, res) => {
+    console.log(req.body);
+    if (req.body.password1 == req.body.password2 && req.body.password1 != '') {
+        data('profileedit', [req.body.username, req.body.email, req.body.password1, req.file.filename, req.body.id]).then((data) => {
+            res.redirect('/profile/' + req.body.id)
+        })
+    } else if (req.body.password1 == ''){
+        data('profileedit', [req.body.username, req.body.email, req.body.password, req.file.filename, req.body.id]).then((data) => {
+            res.redirect('/profile/' + req.body.id)
+        })
+    } else {
+        res.redirect('/editprofile/' + req.body.id)
+    }
 })
 app.listen(3000);

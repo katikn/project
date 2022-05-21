@@ -21,17 +21,28 @@
                     <div class="card">
                         <img src="/images/{{img}}" alt="">
                         <h3>{{title}}</h3>
-                        <h5>{{status}} | {{username}}</h5>
                     </div>
                     {{/each}}
                 </div>
                 <div class="col-md-4">
                     {{#each querys}}
                     <div class="right-card">
-                        <h1>Продолжение</h1>
-                        <p>{{text}}</p>
+                        <h2>Пост написан:</h2>
+                        <img src="/profileimages/{{img_user}}" alt="" width="150px" height="150px">
+                        <h5>{{status}} | {{username}}</h5>
                     </div>
                     {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="centr">
+                        {{#each querys}}
+                        <p>{{text}}</p>
+                        {{/each}}
+                    </div>
                 </div>
             </div>
         </div>

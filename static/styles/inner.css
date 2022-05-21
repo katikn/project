@@ -1,6 +1,6 @@
 .card {
     display: flex;
-    height: 600px;
+    height: 500px;
     width: 90%;
     border: 1px solid white;
     margin-top: 50px;
@@ -20,7 +20,7 @@
 .right-card {
     width: 90%;
     margin-top: 50px;
-    height: 600px;
+    height: 500px;
     background-color: #2a7ce185;
     padding: 10px;
 }
@@ -38,4 +38,10 @@
 
 body {
     min-height: 1000px;
+}
+
+.centr {
+    margin-top: 10px;
+    margin-right: 3%;
+    margin-left: 6.5%;
 }

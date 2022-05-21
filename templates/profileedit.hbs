@@ -28,11 +28,20 @@
                         class="form-control"></input>
                 </div>
                 <div class="mb-3">
-                    <img width="190px" src="/profileimages/{{img_user}}" alt="">
+                    <span>Новый пароль</span>
+                    <input type="password" name="password1" id="password1" class="form-control"></input>
+                </div>
+                <div class="mb-3">
+                    <span>Подтвердите новый пароль</span>
+                    <input type="password" name="password2" id="password2" class="form-control"></input>
+                </div>
+                <div class="mb-3">
+                    <img width="190px" src="/profileimages/{{img_user}}" alt="Вы не выбрали картинку">
                     <input type="file" name="image" accept="image/*, image/jpeg" required>
                 </div>
                 <input type="submit" class="btn btn-primary" value="Edit">
-                <input type="hidden" name="id" id="id" value="{{id}}">
+                <input type="hidden" name="password" id="password" class="form-control" value="{{password}}"></input>
+                <input type="hidden" name="id" id="id" value="{{id_user}}">
                 {{/each}}
             </form>
         </div>

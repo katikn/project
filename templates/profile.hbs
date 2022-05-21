@@ -34,29 +34,26 @@
             </div>
             {{/each}}
         </div>
+    </div>
+    <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <table class="table">
-                    <tr>
-                        {{#each headers}}
-                        <th>{{this}}</th>
-                        {{/each}}
-                        <th>edit</th>
-                        <th>delete</th>
-                    </tr>
-                    {{#each querys}}
-                    <tr>
-                        {{#each this}}
-                        <td>{{this}}</td>
-                        {{/each}}
-                        <td><a href="/edit/{{id}}">edit</a></td>
-                        <td><a href="/delete/{{id}}">del</a></td>
-                    </tr>
-                    {{/each}}
-                </table>
+            {{#each querys}}
+            <div class="col-md-4 card">
+                <div class="profile-card">
+                    <img src="/images/{{img}}" alt="">
+                    <hr>
+                    <h5>{{this.title}}</h5>
+                    <p class="texx">{{this.text}}</p>
+                    <h6>Категория: {{name}}</h6>
+                    <a href="/{{name}}/{{id}}" class="btncolorblue">Читать</a> <br>
+                    <a href="/edit/{{id}}">Редактировать</a>
+                    <a href="/delete/{{id}}">Удалить</a>
+                </div>
             </div>
+            {{/each}}
         </div>
     </div>
+
 </body>
 
 </html>
