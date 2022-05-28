@@ -9,7 +9,7 @@ ul {
 
 .card {
     display: flex;
-    height: 450px;
+    height: 500px;
     margin-top: 20px !important;
     border: 0px !important;
 }
@@ -145,4 +145,14 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.acard {
+    outline: none;
+    text-decoration: none;
+    color: black;
+}
+
+.acard:hover {
+    color: black;
 }

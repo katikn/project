@@ -45,3 +45,13 @@ body {
     margin-right: 3%;
     margin-left: 6.5%;
 }
+
+.acard {
+    outline: none;
+    text-decoration: none;
+    color: black;
+}
+
+.acard:hover {
+    color: black;
+}

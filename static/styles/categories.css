@@ -28,7 +28,7 @@
 
 .card {
     display: flex;
-    height: 450px;
+    height: 500px;
     border: 0px !important;
 }
 
@@ -84,4 +84,14 @@ body {
 
 .btncolorblue:hover {
     color: #2A7DE1;
+}
+
+.acard {
+    outline: none;
+    text-decoration: none;
+    color: black;
+}
+
+.acard:hover {
+    color: black;
 }
