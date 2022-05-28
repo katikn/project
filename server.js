@@ -83,7 +83,8 @@ async function data(query, datas) {
         editpost: "UPDATE general SET title = ?, text = ?, category = ?, img = ? WHERE id = ?",
         profileinfo: "SELECT * FROM general JOIN categories ON general.category = categories.id_category JOIN users ON general.user = users.id_user WHERE id_user = ?",
         profile: "SELECT * FROM users WHERE id_user = ?",
-        profileedit: "UPDATE users SET username = ?, email = ?, password = ?, img_user = ? WHERE id_user = ?"
+        profileedit: "UPDATE users SET username = ?, email = ?, password = ?, img_user = ? WHERE id_user = ?",
+        check: "SELECT user FROM general WHERE id = ?"
 
     };
     let sql = sqls[query];
@@ -595,7 +596,6 @@ app.get('/newpost', (req, res) => {
         data_template["userid"] = req.session.userid
         res.render('createpost.hbs', data_template)
     }
-
 })
 
 app.post('/createpost', urlencodedParser, upload.single('image'), (req, res) => {
@@ -628,23 +628,35 @@ app.get('/admin', (req, res) => {
 })
 
 app.get('/delete/:id', (req, res) => {
-    data('delete', [req.params.id]).then((data) => {
-        res.redirect('/admin')
+    data('check', [req.params.id]).then((data1) => {
+        let checker = data1[0]['user']
+        if (req.session.userid == checker || req.session.userid == 1) {
+            data('delete', [req.params.id]).then((data) => {
+                res.redirect('/admin')
+            })
+        } else {
+            res.redirect('/')
+        }
     })
 })
 
 app.get('/edit/:id', (req, res) => {
-    data('edit', [req.params.id]).then((data) => {
-        data_template = {
-            querys: data
-        };
-        data_template["islogin"] = 1
-        data_template["userid"] = req.session.userid
-        data_template["admin"] = 1
-        res.render('edit.hbs', data_template)
+    data('check', [req.params.id]).then((data1) => {
+        let checker = data1[0]['user']
+        if (req.session.userid == checker || req.session.userid == 1) {
+            data('edit', [req.params.id]).then((data) => {
+                data_template = {
+                    querys: data
+                };
+                data_template["islogin"] = 1
+                data_template["userid"] = req.session.userid
+                res.render('edit.hbs', data_template)
+            })
+        } else {
+            res.redirect('/')
+        }
     })
 })
-
 app.post('/editpost', urlencodedParser, upload.single('image'), (req, res) => {
     console.log(req.body);
     let idata = req.body;
@@ -663,7 +675,6 @@ app.get('/profile/:id', (req, res) => {
     data('profileinfo', [req.params.id]).then((data) => {
         if (data.length > 0) {
             data_template = {
-                headers: Object.keys(data[0]),
                 querys: data,
                 profilename: data.slice(0, 1)
             };
@@ -674,7 +685,6 @@ app.get('/profile/:id', (req, res) => {
                 data_template["owner"] = 1;
             }
             data_template["userid"] = req.session.userid;
-            console.log('--------------------------------------------------------------------------------------');
             console.log(data_template);
             if (req.session.userid == 1) {
                 data_template["admin"] = 1;
