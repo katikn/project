@@ -14,7 +14,6 @@ const storage = multer.diskStorage({
         cb(null, './static/images')
     },
     filename: (req, file, cb) => {
-        console.log(file);
         let imagename = file.originalname
         cb(null, Date.now() + path.extname(file.originalname))
     }
@@ -25,7 +24,6 @@ const storage2 = multer.diskStorage({
         cb(null, './static/profileimages')
     },
     filename: (req, file, cb) => {
-        console.log(file);
         let imagename = file.originalname
         cb(null, Date.now() + path.extname(file.originalname))
     }
@@ -125,7 +123,6 @@ app.get('/', (req, res) => {
                 featured2: data[2],
                 featured3: data[3]
             };
-            console.log(data_template);
             res.render('index.hbs', data_template)
         });
     } else {
@@ -139,8 +136,6 @@ app.get('/', (req, res) => {
             };
             data_template["islogin"] = 1
             data_template["userid"] = req.session.userid
-            console.log(data_template);
-            console.log(req.session);
             if (req.session.userid == 1) {
                 data_template["admin"] = 1
                 res.render('index.hbs', data_template)
@@ -159,7 +154,6 @@ app.get('/life', (req, res) => {
                 most_recent: data.slice(0, 2),
                 header: data.slice(0, 1)
             };
-            console.log(data_template);
             res.render('categories.hbs', data_template)
         });
     } else {
@@ -189,7 +183,6 @@ app.get('/popular', (req, res) => {
                 most_recent: data.slice(0, 2),
                 header: data.slice(0, 1)
             };
-            console.log(data_template);
             res.render('categories.hbs', data_template)
         });
     } else {
@@ -334,7 +327,6 @@ app.get('/life/:id', (req, res) => {
                 querys: data
             };
             if (data_template['querys'].length > 0) {
-                console.log(data_template);
                 res.render('inner.hbs', data_template)
             } else {
                 res.redirect('/life')
@@ -346,7 +338,6 @@ app.get('/life/:id', (req, res) => {
                 querys: data
             };
             if (data_template['querys'].length > 0) {
-                console.log(data_template);
                 data_template["islogin"] = 1
                 data_template["userid"] = req.session.userid
                 if (req.session.userid == 1) {
@@ -368,9 +359,7 @@ app.get('/popular/:id', (req, res) => {
             data_template = {
                 querys: data
             };
-            console.log(data_template['querys']);
             if (data_template['querys'].length > 0) {
-                console.log(data_template);
                 res.render('inner.hbs', data_template)
             } else {
                 res.redirect('/popular')
@@ -381,9 +370,7 @@ app.get('/popular/:id', (req, res) => {
             data_template = {
                 querys: data
             };
-            console.log(data_template['querys']);
             if (data_template['querys'].length > 0) {
-                console.log(data_template);
                 data_template["islogin"] = 1
                 data_template["userid"] = req.session.userid
                 if (req.session.userid == 1) {
@@ -405,9 +392,7 @@ app.get('/travel/:id', (req, res) => {
             data_template = {
                 querys: data
             };
-            console.log(data_template['querys']);
             if (data_template['querys'].length > 0) {
-                console.log(data_template);
                 res.render('inner.hbs', data_template)
             } else {
                 res.redirect('/travel')
@@ -418,9 +403,7 @@ app.get('/travel/:id', (req, res) => {
             data_template = {
                 querys: data
             };
-            console.log(data_template['querys']);
             if (data_template['querys'].length > 0) {
-                console.log(data_template);
                 data_template["islogin"] = 1
                 data_template["userid"] = req.session.userid
                 if (req.session.userid == 1) {
@@ -442,9 +425,7 @@ app.get('/covid/:id', (req, res) => {
             data_template = {
                 querys: data
             };
-            console.log(data_template['querys']);
             if (data_template['querys'].length > 0) {
-                console.log(data_template);
                 res.render('inner.hbs', data_template)
             } else {
                 res.redirect('/covid')
@@ -455,9 +436,7 @@ app.get('/covid/:id', (req, res) => {
             data_template = {
                 querys: data
             };
-            console.log(data_template['querys']);
             if (data_template['querys'].length > 0) {
-                console.log(data_template);
                 data_template["islogin"] = 1
                 data_template["userid"] = req.session.userid
                 if (req.session.userid == 1) {
@@ -479,9 +458,7 @@ app.get('/education/:id', (req, res) => {
             data_template = {
                 querys: data
             };
-            console.log(data_template['querys']);
             if (data_template['querys'].length > 0) {
-                console.log(data_template);
                 res.render('inner.hbs', data_template)
             } else {
                 res.redirect('/education')
@@ -492,9 +469,7 @@ app.get('/education/:id', (req, res) => {
             data_template = {
                 querys: data
             };
-            console.log(data_template['querys']);
             if (data_template['querys'].length > 0) {
-                console.log(data_template);
                 data_template["islogin"] = 1
                 data_template["userid"] = req.session.userid
                 if (req.session.userid == 1) {
@@ -516,9 +491,7 @@ app.get('/technology/:id', (req, res) => {
             data_template = {
                 querys: data
             };
-            console.log(data_template['querys']);
             if (data_template['querys'].length > 0) {
-                console.log(data_template);
                 res.render('inner.hbs', data_template)
             } else {
                 res.redirect('/technology')
@@ -529,9 +502,7 @@ app.get('/technology/:id', (req, res) => {
             data_template = {
                 querys: data
             };
-            console.log(data_template['querys']);
             if (data_template['querys'].length > 0) {
-                console.log(data_template);
                 data_template["islogin"] = 1
                 data_template["userid"] = req.session.userid
                 if (req.session.userid == 1) {
@@ -576,7 +547,6 @@ app.post('/loging', urlencodedParser, (req, res) => {
         if (data.length > 0) {
             session = req.session;
             session.userid = data[0]['id_user'];
-            console.log(session);
             req.session.islogin = 1
             if (session.userid == 1) {
                 req.session.admin = 1
@@ -599,7 +569,6 @@ app.get('/newpost', (req, res) => {
 })
 
 app.post('/createpost', urlencodedParser, upload.single('image'), (req, res) => {
-    console.log(req.file.filename);
     data('newpost', [req.body.title, req.body.text, req.body.select, req.file.filename, req.session.userid]).then((data) => {
         res.redirect('/');
     })
@@ -658,7 +627,6 @@ app.get('/edit/:id', (req, res) => {
     })
 })
 app.post('/editpost', urlencodedParser, upload.single('image'), (req, res) => {
-    console.log(req.body);
     let idata = req.body;
     if (!req.file.filename) {
         data('editpost', [idata.title, idata.text, idata.select, '', idata.id]).then((data) => {
@@ -672,31 +640,60 @@ app.post('/editpost', urlencodedParser, upload.single('image'), (req, res) => {
 })
 
 app.get('/profile/:id', (req, res) => {
-    data('profileinfo', [req.params.id]).then((data) => {
-        if (data.length > 0) {
+    data('profileinfo', [req.params.id]).then((data1) => {
+        if (data1.length > 0) {
             data_template = {
-                querys: data,
-                profilename: data.slice(0, 1)
+                querys: data1,
+                profilename: data1.slice(0, 1)
             };
             if (req.session.userid) {
                 data_template["islogin"] = 1;
             }
-            if (req.params.id == req.session.userid) {
-                data_template["owner"] = 1;
-            }
             data_template["userid"] = req.session.userid;
-            console.log(data_template);
-            if (req.session.userid == 1) {
-                data_template["admin"] = 1;
-                res.render('profile.hbs', data_template);
+            data_template["posts"] = 1
+            if (req.params.id == req.session.userid) {
+                if (req.session.userid == 1) {
+                    data_template["admin"] = 1;
+                    res.render('profile1.hbs', data_template);
+                } else {
+                    res.render('profile1.hbs', data_template);
+                }
             } else {
-                res.render('profile.hbs', data_template);
+                if (req.session.userid == 1) {
+                    data_template["admin"] = 1;
+                    res.render('profile2.hbs', data_template);
+                } else {
+                    res.render('profile2.hbs', data_template);
+                }
             }
         } else {
-            res.send('Такой страницы ещё нет (напишите свой первый пост) <a href="/">На главную</a>')
+            data('profile', [req.params.id]).then((data1) => {
+                data_template = {
+                    profilename: data1,
+                };
+                if (req.session.userid) {
+                    data_template["islogin"] = 1;
+                }
+                data_template["userid"] = req.session.userid;
+                data_template["posts"] = 0;
+                if (req.params.id == req.session.userid) {
+                    if (req.session.userid == 1) {
+                        data_template["admin"] = 1;
+                        res.render('profile1.hbs', data_template);
+                    } else {
+                        res.render('profile1.hbs', data_template);
+                    }
+                } else {
+                    if (req.session.userid == 1) {
+                        data_template["admin"] = 1;
+                        res.render('profile2.hbs', data_template);
+                    } else {
+                        res.render('profile2.hbs', data_template);
+                    }
+                }
+            })
         }
     })
-
 });
 
 app.get('/editprofile/:id', (req, res) => {
@@ -718,7 +715,6 @@ app.get('/editprofile/:id', (req, res) => {
 });
 
 app.post('/editprof', urlencodedParser, upload2.single('image'), (req, res) => {
-    console.log(req.body);
     if (req.body.password1 == req.body.password2 && req.body.password1 != '') {
         data('profileedit', [req.body.username, req.body.email, req.body.password1, req.file.filename, req.body.id]).then((data) => {
             res.redirect('/profile/' + req.body.id)
